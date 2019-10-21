@@ -109,6 +109,12 @@ type CronJobSpec struct {
 	// This tests that pattern validator is properly applied.
 	// +kubebuilder:validation:Pattern=`^$|^((https):\/\/?)[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|\/?))$`
 	PatternObject string `json:"patternObject"`
+
+	// This tests that associative lists work.
+	// +listType=associative
+	// +listMapKey=name
+	// +listMapKey=secondary
+	AssociativeList []AssociativeType `json:"associativeList"`
 }
 
 type NestedObject struct {
@@ -118,6 +124,12 @@ type NestedObject struct {
 
 type RootObject struct {
 	Nested NestedObject `json:"nested"`
+}
+
+type AssociativeType struct {
+	Name      string `json:"name"`
+	Secondary int    `json:"secondary"`
+	Foo       string `json:"foo"`
 }
 
 // +kubebuilder:validation:MinLength=4

@@ -84,6 +84,28 @@ func (Format) Help() *markers.DefinitionHelp {
 	}
 }
 
+func (ListMapKey) Help() *markers.DefinitionHelp {
+	return &markers.DefinitionHelp{
+		Category: "CRD topology",
+		DetailedHelp: markers.DetailedHelp{
+			Summary: "specifies the keys to map listTypes. ",
+			Details: "ListMapKey indicates the index of a map list. They can be repeated if multiple keys must be used. It can only be used when ListType is set to map, and the keys should be scalar types.",
+		},
+		FieldHelp: map[string]markers.DetailedHelp{},
+	}
+}
+
+func (ListType) Help() *markers.DefinitionHelp {
+	return &markers.DefinitionHelp{
+		Category: "CRD topology",
+		DetailedHelp: markers.DetailedHelp{
+			Summary: "specifies the type of data-structure that the list represents (map, set, atomic). ",
+			Details: "Possible data-structure types of a list are: - \"map\": it needs to have a key field, which will be used to build an associative list. A typical example is a the pod container list, which is indexed by the container name. - \"set\": Fields need to be \"scalar\", and there can be only one occurence of each. - \"atomic\": All the fields in the list are treated as a single value, are typically manipulated together by the same actor.",
+		},
+		FieldHelp: map[string]markers.DetailedHelp{},
+	}
+}
+
 func (MaxItems) Help() *markers.DefinitionHelp {
 	return &markers.DefinitionHelp{
 		Category: "CRD validation",

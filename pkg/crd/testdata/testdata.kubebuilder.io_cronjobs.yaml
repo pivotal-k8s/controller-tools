@@ -34,6 +34,26 @@ spec:
         spec:
           description: CronJobSpec defines the desired state of CronJob
           properties:
+            associativeList:
+              description: This tests that associative lists work.
+              items:
+                properties:
+                  foo:
+                    type: string
+                  name:
+                    type: string
+                  secondary:
+                    type: integer
+                required:
+                - foo
+                - name
+                - secondary
+                type: object
+              type: array
+              x-kubernetes-list-map-keys:
+              - name
+              - secondary
+              x-kubernetes-list-type: associative
             binaryName:
               description: This tests byte slice schema generation.
               format: byte
@@ -1537,6 +1557,7 @@ spec:
                                       - containerPort
                                       type: object
                                     type: array
+                                    x-kubernetes-list-type: map
                                   readinessProbe:
                                     description: 'Periodic probe of container service
                                       readiness. Container will be removed from service
@@ -2691,6 +2712,7 @@ spec:
                                       - containerPort
                                       type: object
                                     type: array
+                                    x-kubernetes-list-type: map
                                   readinessProbe:
                                     description: 'Periodic probe of container service
                                       readiness. Container will be removed from service
@@ -4828,6 +4850,7 @@ spec:
               minLength: 4
               type: string
           required:
+          - associativeList
           - binaryName
           - canBeNull
           - defaultedObject

@@ -34,6 +34,10 @@ spec:
         spec:
           description: CronJobSpec defines the desired state of CronJob
           properties:
+            # atomicMap:
+            #   description: Ensure map types work
+            #   type: object
+            #   x-kubernetes-map-type: atomic
             associativeList:
               description: This tests that associative lists work.
               items:

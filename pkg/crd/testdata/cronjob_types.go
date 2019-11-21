@@ -118,6 +118,8 @@ type CronJobSpec struct {
 	// +listMapKey=name
 	// +listMapKey=secondary
 	AssociativeList []AssociativeType `json:"associativeList"`
+
+	GranularMap map[string]string
 }
 
 type NestedObject struct {

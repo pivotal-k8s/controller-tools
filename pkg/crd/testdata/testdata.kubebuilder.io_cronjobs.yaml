@@ -56,6 +56,17 @@ spec:
                 - name
                 - secondary
                 x-kubernetes-list-type: map
+              granularMap:
+                description: A map that allows different actors to manage different fields
+                type: object
+                x-kubernetes-map-type: granular # doesn't test for value here, just key
+                additionalProperties:
+                  type: object
+                  properties:
+                    code:
+                      type: integer
+                    text:
+                      type: string
               binaryName:
                 description: This tests byte slice schema generation.
                 format: byte
@@ -132,7 +143,7 @@ spec:
                     type: object
                   spec:
                     description: 'Specification of the desired behavior of the job.
-                      More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status'
+                      More info: https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status'
                     properties:
                       activeDeadlineSeconds:
                         description: Specifies the duration in seconds relative to
@@ -1772,6 +1783,7 @@ spec:
                                             value. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/'
                                           type: object
                                       type: object
+                                      # x-kubernetes-map-type: granular
                                     securityContext:
                                       description: 'Security options the pod should
                                         run with. More info: https://kubernetes.io/docs/concepts/policy/security-context/
@@ -2960,6 +2972,7 @@ spec:
                                             specified, otherwise to an implementation-defined
                                             value. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/'
                                           type: object
+                                          # x-kubernetes-map-type: granular
                                       type: object
                                     securityContext:
                                       description: 'Security options the pod should
@@ -5013,6 +5026,7 @@ spec:
                 type: string
             required:
             - associativeList
+            - granularMap
             - binaryName
             - canBeNull
             - defaultedObject

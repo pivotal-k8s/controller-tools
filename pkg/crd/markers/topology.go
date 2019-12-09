@@ -107,7 +107,7 @@ func (m MapType) ApplyToSchema(schema *apiext.JSONSchemaProps) error {
 	}
 
 	p := string(m)
-	fmt.Println("---------------yes!")
+	fmt.Println("---------------ran applytoschema for map")
 	schema.XMapType = &p
 
 	return nil

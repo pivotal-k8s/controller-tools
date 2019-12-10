@@ -106,6 +106,17 @@ func (ListType) Help() *markers.DefinitionHelp {
 	}
 }
 
+func (MapType) Help() *markers.DefinitionHelp {
+	return &markers.DefinitionHelp{
+		Category: "CRD processing",
+		DetailedHelp: markers.DetailedHelp{
+			Summary: "specifies the level of atomicity of the map; i.e. whether each item in the map is independent of the others, or all fields are treated as a single unit. ",
+			Details: "Possible values: - \"granular\": items in the map are independent of each other, and can be manipulated by different actors. This is the default behavior. - \"atomic\": all fields are treated as one unit. Any changes have to replace the entire map.",
+		},
+		FieldHelp: map[string]markers.DetailedHelp{},
+	}
+}
+
 func (MaxItems) Help() *markers.DefinitionHelp {
 	return &markers.DefinitionHelp{
 		Category: "CRD validation",

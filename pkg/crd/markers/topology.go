@@ -58,8 +58,7 @@ type ListType string
 type ListMapKey string
 
 // +controllertools:marker:generateHelp:category="CRD processing"
-
-// MapType specifies the level of atomicity of the map,
+// MapType specifies the level of atomicity of the map;
 // i.e. whether each item in the map is independent of the others,
 // or all fields are treated as a single unit.
 //
@@ -69,7 +68,6 @@ type ListMapKey string
 // This is the default behavior.
 // - "atomic": all fields are treated as one unit.
 // Any changes have to replace the entire map.
-
 type MapType string
 
 func (l ListType) ApplyToSchema(schema *apiext.JSONSchemaProps) error {

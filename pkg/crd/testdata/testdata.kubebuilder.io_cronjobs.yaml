@@ -122,6 +122,13 @@ spec:
                   a pointer to distinguish between explicit zero and not specified.
                 format: int32
                 type: integer
+              mapOfInfo:
+                description: A map that allows different actors to manage different fields
+                type: object
+                x-kubernetes-map-type: granular
+                additionalProperties:
+                  format: byte
+                  type: string
               jobTemplate:
                 description: Specifies the job that will be created when executing
                   a CronJob.
@@ -5019,6 +5026,7 @@ spec:
             - defaultedSlice
             - defaultedString
             - jobTemplate
+            - mapOfInfo
             - patternObject
             - schedule
             - twoOfAKindPart0

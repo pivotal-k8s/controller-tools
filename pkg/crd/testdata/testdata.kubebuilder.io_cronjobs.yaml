@@ -127,12 +127,15 @@ spec:
                 type: object
                 x-kubernetes-map-type: granular # doesn't test for value here, just key
                 additionalProperties:
-                  type: object
-                  properties:
-                    code:
-                      type: integer
-                    text:
-                      type: string
+                  format: byte
+                  type: string
+                  # properties:
+                  #   code:
+                  #     format: byte
+                  #     type: string
+                  #   text:
+                  #     format: byte
+                  #     type: string
 
               jobTemplate:
                 description: Specifies the job that will be created when executing
@@ -5030,8 +5033,8 @@ spec:
             - defaultedObject
             - defaultedSlice
             - defaultedString
-            - mapOfInfo
             - jobTemplate
+            - mapOfInfo
             - patternObject
             - schedule
             - twoOfAKindPart0

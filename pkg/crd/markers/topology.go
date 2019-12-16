@@ -29,6 +29,7 @@ var TopologyMarkers = []*definitionWithHelp{
 	must(markers.MakeDefinition("listType", markers.DescribesField, ListType(""))),
 	must(markers.MakeDefinition("listMapKey", markers.DescribesField, ListMapKey(""))),
 	must(markers.MakeDefinition("mapType", markers.DescribesField, MapType(""))),
+	must(markers.MakeDefinition("structType", markers.DescribesField, StructType(""))),
 }
 
 func init() {
@@ -70,6 +71,19 @@ type ListMapKey string
 // Any changes have to replace the entire map.
 type MapType string
 
+// +controllertools:marker:generateHelp:category="CRD processing"
+// StructType specifies the level of atomicity of the struct;
+// i.e. whether each field in the struct is independent of the others,
+// or all fields are treated as a single unit.
+//
+// Possible values:
+// - "granular": fields in the struct are independent of each other,
+// and can be manipulated by different actors.
+// This is the default behavior.
+// - "atomic": all fields are treated as one unit.
+// Any changes have to replace the entire struct.
+type StructType string
+
 func (l ListType) ApplyToSchema(schema *apiext.JSONSchemaProps) error {
 	if schema.Type != "array" {
 		return fmt.Errorf("must apply listType to an array")
@@ -110,4 +124,21 @@ func (m MapType) ApplyToSchema(schema *apiext.JSONSchemaProps) error {
 	return nil
 }
 
-func (l MapType) ApplyFirst() {}
+func (m MapType) ApplyFirst() {}
+
+func (s StructType) ApplyToSchema(schema *apiext.JSONSchemaProps) error {
+	if schema.Type != "object" {
+		return fmt.Errorf("must apply structType to an object")
+	}
+
+	if s != "atomic" && s != "granular" {
+		return fmt.Errorf(`StructType must be either "granular" or "atomic"`)
+	}
+
+	p := string(s)
+	schema.XMapType = &p
+
+	return nil
+}
+
+func (s StructType) ApplyFirst() {}

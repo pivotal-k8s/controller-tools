@@ -124,8 +124,6 @@ func (m MapType) ApplyToSchema(schema *apiext.JSONSchemaProps) error {
 	return nil
 }
 
-func (m MapType) ApplyFirst() {}
-
 func (s StructType) ApplyToSchema(schema *apiext.JSONSchemaProps) error {
 	if schema.Type != "object" && schema.Type != "" {
 		return fmt.Errorf("must apply structType to an object; either explicitly set or defaulted through an empty schema type")
@@ -140,5 +138,3 @@ func (s StructType) ApplyToSchema(schema *apiext.JSONSchemaProps) error {
 
 	return nil
 }
-
-func (s StructType) ApplyFirst() {}
